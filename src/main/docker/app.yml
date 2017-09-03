@@ -1,0 +1,24 @@
+version: '2'
+services:
+    second-app:
+        image: second
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=second-cassandra
+            - JHIPSTER_SLEEP=30 # gives time for the Cassandra cluster to start and execute the migration scripts
+        ports:
+            - 8080:8080
+    second-cassandra:
+        extends:
+            file: cassandra-cluster.yml
+            service: second-cassandra
+    second-cassandra-node:
+        image: cassandra:3.9
+        environment:
+            - CASSANDRA_SEEDS=second-cassandra
+    second-cassandra-migration:
+        extends:
+            file: cassandra-migration.yml
+            service: second-cassandra-migration
+        environment:
+            - CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql

@@ -1,0 +1,4 @@
+com/mycompany/myapp/aop/logging/LoggingAspect.class
+com/mycompany/myapp/service/util/RandomUtil.class
+com/mycompany/myapp/config/LoggingAspectConfiguration.class
+com/mycompany/myapp/web/rest/util/PaginationUtil.class
